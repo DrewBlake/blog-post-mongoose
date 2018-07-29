@@ -1,0 +1,24 @@
+{
+  "name": "blog-post-mongoose",
+  "version": "1.0.0",
+  "description": "blog post with mongo db",
+  "main": "config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DrewBlake/blog-post-mongoose.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DrewBlake/blog-post-mongoose/issues"
+  },
+  "homepage": "https://github.com/DrewBlake/blog-post-mongoose#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongoose": "^5.2.5"
+  }
+}
