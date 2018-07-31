@@ -12,8 +12,8 @@ const blogpostSchema = mongoose.Schema({
     lastName: String
   },
   created: {type: Date, default: Date.now}
-},
-{collection: 'blog'});
+}/*,
+{collection: 'blogs'}*/);
 
 // *virtuals* (http://mongoosejs.com/docs/guide.html#virtuals)
 // allow us to define properties on our object that manipulate
@@ -41,6 +41,6 @@ blogpostSchema.methods.serialize = function() {
 
 // note that all instance methods and virtual properties on our
 // schema must be defined *before* we make the call to `.model`.
-const BlogPosts = mongoose.model("blog", blogpostSchema);
+const BlogPosts = mongoose.model("blogs", blogpostSchema);
 
 module.exports = { BlogPosts };
