@@ -4,14 +4,16 @@ const mongoose = require("mongoose");
 
 
 const blogpostSchema = mongoose.Schema({
+
   title: { type: String, required: true },
   content: { type: String, required: true },
   author: {
     firstName: String,
     lastName: String
   },
-  created: Date.now()
-});
+  created: {type: Date, default: Date.now}
+},
+{collection: 'blog'});
 
 // *virtuals* (http://mongoosejs.com/docs/guide.html#virtuals)
 // allow us to define properties on our object that manipulate
@@ -29,6 +31,7 @@ blogpostSchema.virtual("authorName").get(function() {
 // exposes *some* of the fields we want from the underlying data
 blogpostSchema.methods.serialize = function() {
   return {
+    id: this._id,
     title: this.title,
     content: this.content,
     author: this.authorName,
@@ -38,6 +41,6 @@ blogpostSchema.methods.serialize = function() {
 
 // note that all instance methods and virtual properties on our
 // schema must be defined *before* we make the call to `.model`.
-const BlogPosts = mongoose.model("BlogPosts", blogpostSchema);
+const BlogPosts = mongoose.model("blog", blogpostSchema);
 
 module.exports = { BlogPosts };

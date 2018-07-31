@@ -15,12 +15,12 @@ const { BlogPosts } = require("./models");
 const app = express();
 app.use(express.json());
 
-// GET requests to /restaurants => return 10 restaurants
+// GET requests to BlogPosts
 app.get("/posts", (req, res) => {
   BlogPosts.find()
-    .then(blogposts => {
+    .then(blog => {
       res.json({
-        blogposts: blogposts.map(blogpost => blogpost.serialize())
+        blog: blog.map(blog => blog.serialize())
       });
     })
     .catch(err => {
@@ -33,7 +33,7 @@ app.get("/posts", (req, res) => {
 app.get("/posts/:id", (req, res) => {
   BlogPosts
     .findById(req.params.id)
-    .then(blogpost => res.json(blogpost.serialize()))
+    .then(blog => res.json(blog.serialize()))
     .catch(err => {
       console.error(err);
       res.status(500).json({ message: "Internal server error" });
@@ -57,7 +57,7 @@ app.post("/posts", (req, res) => {
     author: req.body.author,
     created: req.body.created
   })
-    .then(blogpost => res.status(201).json(blogpost.serialize()))
+    .then(blog => res.status(201).json(blog.serialize()))
     .catch(err => {
       console.error(err);
       res.status(500).json({ message: "Internal server error" });
@@ -89,13 +89,13 @@ app.put("/posts/:id", (req, res) => {
   BlogPosts
     // all key/value pairs in toUpdate will be updated -- that's what `$set` does
     .findByIdAndUpdate(req.params.id, { $set: toUpdate })
-    .then(blogpost => res.status(204).end())
+    .then(blog => res.status(204).end())
     .catch(err => res.status(500).json({ message: "Internal server error" }));
 });
 
 app.delete("/posts/:id", (req, res) => {
   BlogPosts.findByIdAndRemove(req.params.id)
-    .then(blogpost => res.status(204).end())
+    .then(blog => res.status(204).end())
     .catch(err => res.status(500).json({ message: "Internal server error" }));
 });
 
